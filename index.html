@@ -1,0 +1,138 @@
+<!doctype html>
+<title>Welcome to Work Diary Application by ~AlpX</title>
+
+<html ng-app="workdiaryapp">
+
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js">
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js">
+    </script>
+    <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.1.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="workdiary.css">
+    <script src="workdiaryapp.js"></script> 
+  </head>
+
+  <body>  
+
+<div ng-controller="diaryController">
+
+<div ng-switch on="slideSelection">
+
+  <div class="animate-if" ng-switch-when="loginslide"> 
+    <table>
+        <tr>
+            <td>
+                  <label for="usr">User:</label>
+            </td>
+            <td>
+                  <input type="text" class="form-control" id="usr">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                  <label for="pwd">Password:</label>
+            </td>
+            <td>
+                  <input type="password" class="form-control" id="pwd">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                .
+            </td>
+            <td>
+                <button type="button" id="" class="btn" ng-click="login()">Login
+                  <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div ng-if="isloggedIn">You are logged in : {{loginName}}</div>
+            </td>
+            <td>
+              <div>by&nbsp<a href="http://alpx.io/">~AlpX</a></div>
+            </td>
+        </tr>
+    </table>
+  </div>
+
+
+  <div class="animate-if" ng-switch-when="dateslide"> 
+    <table border=1>        
+        <tr>
+            <td colspan=2>
+              <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                  <div style="display:inline-block; min-height:290px;">
+                    <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+                  </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button  ng-if="isloggedIn" type="button" id="" class="btn" ng-click="logout()">
+                  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>
+                  Logout</button>
+                <button  ng-if="!isloggedIn"type="button" id="" class="btn disabled" ng-click="logout()">
+                  <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>
+                  Logout</button>
+            </td>
+            <td>
+              <button type="button" class="btn" ng-click="gotoDiary(dt)">Work Log
+              <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+              </button>
+            </td>
+        </tr>
+    </table>
+  </div>
+
+
+  <div class="animate-if" ng-switch-when="diaryslide"> 
+    <table>
+        <tr>
+            <td>
+                What did I do today?
+                <br>
+              <textarea ng-model="$parent.todaysDiary" class="span6" rows="4" placeholder="Please write here.." required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                What will I do tomorrow?
+                <br>
+              <textarea ng-model="$parent.tomorrowsDiary" class="span6" rows="4" placeholder="Please write here.." required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                What are the road blocks for my work?
+                <br>
+              <textarea ng-model="$parent.roadblockDiary" class="span6" rows="4" placeholder="Please write here.." required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <button type="button" id="" class="btn" ng-click="gotoDateSelection()">
+                <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>
+                Back
+              </button>
+              <button type="button" id="" class="btn" ng-click="save()">Save
+              <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+              </button>
+            </td>
+        </tr>
+    </table>
+  </div>
+
+</div>
+  <alert ng-hide="alert.hide" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
+</div>
+
+</body>
+</html>
