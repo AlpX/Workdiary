@@ -89,10 +89,12 @@ var saveDocuments = function(coll, obj) {
     //console.log("Connected correctly to server");
     // Get the documents collection
     var collection = db.collection(coll);
-    // Insert some documents
-    collection.save(obj);
-    db.close();
-  });  
+    // Save some documents
+    collection.save(obj, function (err, result) {
+      // check err...
+      assert.equal(err, null);
+      db.close();
+    });
  }
 
  // Email

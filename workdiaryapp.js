@@ -8,7 +8,7 @@
 angular.module('workdiaryapp', ['ui.bootstrap'])
   .controller('diaryController',  ['$scope', function($scope) { 
   $scope.alert={};
-  $scope.alert.msg="Welcome to Dantou Work Diary";
+  $scope.alert.msg="Welcome to Work Diary";
   $scope.alert.type="success";
   //$scope.alert.type="danger";
 
