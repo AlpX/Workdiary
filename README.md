@@ -16,3 +16,5 @@ Simply you choose the date for logging your work that day. The UI allows yesterd
 
 The inputs are in order: ‘What did I do today?’, ‘What will I do tomorrow?’, ‘What are the obstacles I faced today if any?’.
 If there are previously entered logs, they are read from mongodb and sent to client page by socket.io. The text boxes will be filled. If you make any change or write new entry to the text boxes, when you click ‘Save’, they will be saved to the mongodb database.
+
+In addition to making work logs, the Workdiary application sends reminders to those who didn't enter their work log on 22:30. At 23:00 a work diary report email is sent to an email group which includes all users. The report includes a html content of users' work logs in a table. I used nodemailer for emailing from an exchange email account from work.
