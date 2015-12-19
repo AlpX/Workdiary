@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+"/public"));
 
 server.listen(7007);
 console.log('web gui is served on 7007');
